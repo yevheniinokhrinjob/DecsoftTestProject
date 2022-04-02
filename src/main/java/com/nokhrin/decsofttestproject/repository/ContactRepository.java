@@ -11,5 +11,6 @@ import java.util.List;
 public interface ContactRepository extends JpaRepository<Contact, Long> {
     Contact findById(long id);
     Contact findByHomePhoneNumber(int number);
+    Contact findByEmail(String email);
     List<Contact> findByFirstNameAndLastName(String firstName, String lastName);
 }

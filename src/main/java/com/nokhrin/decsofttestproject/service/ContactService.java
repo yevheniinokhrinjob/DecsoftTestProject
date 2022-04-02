@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface ContactService {
 
     void saveContact(Contact contact);
@@ -13,6 +13,8 @@ public interface ContactService {
     void deleteContact(long id);
     List<Contact> listContacts();
     Contact getContactById(long id);
+    Contact getContactByEmail(String email);
     Contact getContactByHomePhoneNumber(int number);
     List<Contact> getContactByFirstNameAndLastName(String firstName,String lastName);
+    void addRoleToContact(Long contactId, String role);
 }

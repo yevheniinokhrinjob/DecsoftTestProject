@@ -4,8 +4,10 @@ package com.nokhrin.decsofttestproject.controller;
 import com.nokhrin.decsofttestproject.model.Contact;
 import com.nokhrin.decsofttestproject.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,15 +18,10 @@ public class ContactController {
     private ContactService contactService;
 
 
+
     @GetMapping
     public List<Contact> getAllContacts(){
-       /* Contact contact = new Contact();
-        contact.setEmail("sdas");
-        contact.setFirstName("A");
-        contact.setLastName("B");
-        contact.setHomePhoneNumber(12312);
-        contact.setWorkPhoneNumber(444);
-        contactService.saveContact(contact);*/
+
         return contactService.listContacts();
     }
     @GetMapping("/number/{number}")
@@ -35,8 +32,18 @@ public class ContactController {
     public List<Contact> getContactsByFirstNameAndLastName(@PathVariable String firstName, @PathVariable String lastName){
         return contactService.getContactByFirstNameAndLastName(firstName,lastName);
     }
-    @PostMapping
-    public String saveContact(@RequestBody Contact contact){
+
+    @PostMapping("/register")
+    public String saveContact(@Valid @RequestBody Contact contact){
+    /*public String saveContact(){
+       Contact contact = new Contact();
+        contact.setEmail("sdas@e.com");
+        contact.setFirstName("A");
+        contact.setLastName("B");
+        contact.setHomePhoneNumber("123121");
+        contact.setWorkPhoneNumber("444");
+        contact.setPassword("password");*/
+     //   System.out.println(result.getErrorCount());
         contactService.saveContact(contact);
         return "Contact saved";
     }
