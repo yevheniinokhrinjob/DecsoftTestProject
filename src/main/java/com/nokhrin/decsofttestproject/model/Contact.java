@@ -28,7 +28,7 @@ public class Contact {
     private String password;
 
     @Email
-    @Column(unique = true)
+     @Column(unique = true)
     private String email;
 
     @ManyToMany( fetch = FetchType.EAGER)

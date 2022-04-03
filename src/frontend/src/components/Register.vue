@@ -24,6 +24,9 @@
       <label for="password">Password: </label>
       <input id="password" v-model="password" type="password">
     </p>
+    <p class="message">
+      {{ message }}
+    </p>
     <button type="submit">Accept</button>
   </form>
 
@@ -39,16 +42,14 @@ export default {
       homePhoneNumber: '',
       workPhoneNumber: '',
       email: '',
-      password: ''
+      password: '',
+      message: ''
     }
   },
   methods: {
     register() {
-      /*  fetch("/getIt")
-          .then((response)=>response.json())
-          .then((data)=>{
-            console.log(data)
-          })*/
+
+      let vm = this;
       const postData = {
         firstName: this.firstName,
         lastName: this.lastName,
@@ -57,30 +58,37 @@ export default {
         password: this.password,
         email: this.email
       };
-
       fetch("/contact/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-
         },
         body: JSON.stringify(postData)
-      }).then(response => console.log(response))
-      this.goToList()
+      }).then(response => {
+            if (response.status == 400) {
+              this.message = "Invalid data"
+            } else {
+              this.message = ""
+              vm.goToLogin();
+            }
+          }
+      )
+
     },
     goToList() {
-      this.$router.push({ path: "/list" });
+      this.$router.push({path: "/list"});
     },
     goToLogin() {
-      this.$router.push({ path: "/login" });
+      this.$router.push({path: "/login"});
     }
   },
-  mounted() {
-    if (localStorage.token) {
-      this.goToList()
+
+    mounted() {
+      if (localStorage.token) {
+        this.goToList()
+      }
     }
   }
-}
 </script>
 
 <style scoped>
@@ -100,5 +108,9 @@ li {
 
 a {
   color: #42b983;
+}
+
+p.message {
+  color: red;
 }
 </style>

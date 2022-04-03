@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div>
+      <Navigation/>
+    </div>
   <div>
     <form @submit.prevent="editItem">
       <p>
@@ -28,8 +31,11 @@
 </template>
 
 <script>
+import Navigation from "@/components/Navigation";
+
 export default {
   name: "Edit",
+  components:{Navigation},
   data() {
     return {
       editObject: {

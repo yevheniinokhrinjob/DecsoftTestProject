@@ -7,11 +7,9 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="nav-padding">
-        <b-nav-item v-if="!userToken" to="/login">Login</b-nav-item>
-        <b-nav-item v-if="!userToken" to="/register">Register</b-nav-item>
-        <b-nav-item v-if="userToken" to="/list">List</b-nav-item>
-        <b-nav-item v-if="userToken" to="/edit">Edit</b-nav-item>
-        <b-nav-item v-if="userToken" v-on:click="logout">Logout</b-nav-item>
+        <b-nav-item to="/list">List</b-nav-item>
+        <b-nav-item to="/edit">Edit</b-nav-item>
+        <b-nav-item v-on:click="logout">Logout</b-nav-item>
       </b-navbar-nav>
 
 
@@ -22,20 +20,20 @@
 
 <script>
 export default {
-  data(){
-    return{
+  data() {
+    return {
       userToken: localStorage.token
     }
   },
-  methods:{
-    logout(){
+  methods: {
+    logout() {
       localStorage.removeItem('token')
       localStorage.removeItem('username')
-      this.userToken=localStorage.token
+      this.userToken = localStorage.token
       this.goToLogin()
     },
     goToLogin() {
-      this.$router.push({ path: "/login" });
+      this.$router.push({path: "/login"});
     }
 
   }

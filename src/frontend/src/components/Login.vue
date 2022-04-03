@@ -23,6 +23,7 @@ export default {
     }
   },
   methods: {
+
     loginAction() {
 
       const postData = {
@@ -40,11 +41,11 @@ export default {
         body: JSON.stringify(postData)
       }).then(response=>response.json()).then(data=> localStorage.token=data.token)
       this.goToList()
-      location.reload()
+
     },
     goToList() {
       this.$router.push({ path: "/list" });
-    }
+    },
   },
   mounted() {
     if(localStorage.token){

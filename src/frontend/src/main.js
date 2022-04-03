@@ -9,6 +9,7 @@ import Register from "@/components/Register";
 import ContactList from "@/components/ContactList";
 import Edit from "@/components/Edit";
 
+
 Vue.use(VueRouter);
 Vue.config.productionTip = false
 
