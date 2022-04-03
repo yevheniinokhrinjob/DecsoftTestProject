@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Long> {
     Contact findById(long id);
-    Contact findByHomePhoneNumber(int number);
+    List<Contact> findByHomePhoneNumber(String number);
     Contact findByEmail(String email);
-    List<Contact> findByFirstNameAndLastName(String firstName, String lastName);
+    List<Contact> findByLastName(String lastName);
 }

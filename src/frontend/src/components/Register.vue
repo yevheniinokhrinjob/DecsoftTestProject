@@ -2,27 +2,27 @@
   <form @submit.prevent="register">
     <p>
       <label for="firstName">First name: </label>
-      <input id="firstName" v-model="firstName" type="text" >
+      <input id="firstName" v-model="firstName" type="text">
     </p>
     <p>
       <label for="lastName">Last name: </label>
-      <input  id="lastName" v-model="lastName" type="text" >
+      <input id="lastName" v-model="lastName" type="text">
     </p>
     <p>
       <label for="homePhoneNumber">homePhoneNumber: </label>
-      <input  id="homePhoneNumber" v-model="homePhoneNumber" type="text"  >
+      <input id="homePhoneNumber" v-model="homePhoneNumber" type="text">
     </p>
     <p>
       <label for="workPhoneNumber">workPhoneNumber: </label>
-      <input  id="workPhoneNumber" v-model="workPhoneNumber" type="text"  >
+      <input id="workPhoneNumber" v-model="workPhoneNumber" type="text">
     </p>
     <p>
       <label for="email">Email: </label>
-      <input id="email" v-model="email" type="email"  >
+      <input id="email" v-model="email" type="email">
     </p>
     <p>
       <label for="password">Password: </label>
-      <input id="password" v-model="password" type="password" >
+      <input id="password" v-model="password" type="password">
     </p>
     <button type="submit">Accept</button>
   </form>
@@ -32,8 +32,8 @@
 <script>
 export default {
   name: 'HelloWorld',
-  data(){
-    return{
+  data() {
+    return {
       firstName: '',
       lastName: '',
       homePhoneNumber: '',
@@ -66,24 +66,38 @@ export default {
         },
         body: JSON.stringify(postData)
       }).then(response => console.log(response))
+      this.goToList()
+    },
+    goToList() {
+      this.$router.push({ path: "/list" });
+    },
+    goToLogin() {
+      this.$router.push({ path: "/login" });
+    }
+  },
+  mounted() {
+    if (localStorage.token) {
+      this.goToList()
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }

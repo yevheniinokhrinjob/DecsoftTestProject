@@ -10,11 +10,11 @@ public interface ContactService {
 
     void saveContact(Contact contact);
     void editContact(Contact contact);
-    void deleteContact(long id);
+    void deleteContact(String email);
     List<Contact> listContacts();
     Contact getContactById(long id);
     Contact getContactByEmail(String email);
-    Contact getContactByHomePhoneNumber(int number);
-    List<Contact> getContactByFirstNameAndLastName(String firstName,String lastName);
+    List<Contact> getContactsByHomePhoneNumber(String number);
+    List<Contact> getContactByLastName(String lastName);
     void addRoleToContact(Long contactId, String role);
 }

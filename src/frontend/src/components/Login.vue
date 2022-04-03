@@ -24,18 +24,13 @@ export default {
   },
   methods: {
     loginAction() {
-      /*  fetch("/getIt")
-          .then((response)=>response.json())
-          .then((data)=>{
-            console.log(data)
-          })*/
 
       const postData = {
         username: this.username,
         password: this.password,
 
       };
-
+      localStorage.username=this.username
       fetch("/authenticate", {
         method: "POST",
         headers: {
@@ -44,6 +39,16 @@ export default {
         },
         body: JSON.stringify(postData)
       }).then(response=>response.json()).then(data=> localStorage.token=data.token)
+      this.goToList()
+      location.reload()
+    },
+    goToList() {
+      this.$router.push({ path: "/list" });
+    }
+  },
+  mounted() {
+    if(localStorage.token){
+      this.goToList()
     }
   }
 }

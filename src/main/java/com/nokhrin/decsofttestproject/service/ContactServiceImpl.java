@@ -32,12 +32,19 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public void editContact(Contact contact) {
-        contactRepository.save(contact);
+        Contact dbContact = contactRepository.findByEmail(contact.getEmail());
+        if(dbContact!=null) {
+            dbContact.setFirstName(contact.getFirstName());
+            dbContact.setLastName(contact.getLastName());
+            dbContact.setWorkPhoneNumber(contact.getWorkPhoneNumber());
+            dbContact.setHomePhoneNumber(contact.getHomePhoneNumber());
+            contactRepository.save(dbContact);
+        }
     }
 
     @Override
-    public void deleteContact(long id) {
-        Contact contact = contactRepository.findById(id);
+    public void deleteContact(String email) {
+        Contact contact = contactRepository.findByEmail(email);
         if(contact!=null) {
             contactRepository.delete(contact);
         }
@@ -59,13 +66,13 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact getContactByHomePhoneNumber(int number) {
+    public List<Contact> getContactsByHomePhoneNumber(String number) {
         return contactRepository.findByHomePhoneNumber(number);
     }
 
     @Override
-    public List<Contact> getContactByFirstNameAndLastName(String firstName,String lastName) {
-        return contactRepository.findByFirstNameAndLastName(firstName, lastName);
+    public List<Contact> getContactByLastName(String lastName) {
+        return contactRepository.findByLastName( lastName);
     }
 
     @Override

@@ -7,6 +7,7 @@ import VueRouter from 'vue-router';
 import Login from "@/components/Login";
 import Register from "@/components/Register";
 import ContactList from "@/components/ContactList";
+import Edit from "@/components/Edit";
 
 Vue.use(VueRouter);
 Vue.config.productionTip = false
@@ -18,9 +19,10 @@ const router = new VueRouter({
   mode: 'history',
   base: __dirname,
   routes: [
-    { path: '/', component: Login },
+    { path: '/login', component: Login },
     { path: '/register', component: Register },
-    { path: '/list', component: ContactList }
+    { path: '/list', component: ContactList },
+    { path: '/edit', component: Edit }
   ]
 });
 
