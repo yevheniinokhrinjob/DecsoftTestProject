@@ -5,23 +5,29 @@
     </div>
   <div>
     <form @submit.prevent="editItem">
-      <p>
-        <label for="firstName">First name: </label>
-        <input id="firstName" v-model="editObject.firstName" type="text">
-      </p>
-      <p>
-        <label for="lastName">Last name: </label>
-        <input id="lastName" v-model="editObject.lastName" type="text">
-      </p>
-      <p>
-        <label for="homePhoneNumber">homePhoneNumber: </label>
-        <input id="homePhoneNumber" v-model="editObject.homePhoneNumber" type="text">
-      </p>
-      <p>
-        <label for="workPhoneNumber">workPhoneNumber: </label>
-        <input id="workPhoneNumber" v-model="editObject.workPhoneNumber" type="text">
-      </p>
+      <div class="row justify-content-center">
+        <div class="col-sm-6">
+          <div class="form-outline mb-4">
+            <label for="firstName" class="form-label">First name: </label>
+            <input id="firstName" class="form-control" v-model="editObject.firstName" type="text">
+          </div>
+          <div class="form-outline mb-4">
+            <label for="lastName" class="form-label">Last name: </label>
+            <input id="lastName" class="form-control" v-model="editObject.lastName" type="text">
+          </div>
+          <div class="form-outline mb-4">
+            <label for="homePhoneNumber" class="form-label">homePhoneNumber: </label>
+            <input id="homePhoneNumber" class="form-control" v-model="editObject.homePhoneNumber" type="text">
+          </div>
+          <div class="form-outline mb-4">
+            <label for="workPhoneNumber" class="form-label">workPhoneNumber: </label>
+            <input id="workPhoneNumber" class="form-control" v-model="editObject.workPhoneNumber" type="text">
+          </div>
+          <div class="form-outline mb-4">
       <button type="submit">Edit</button>
+          </div>
+        </div>
+        </div>
     </form>
   </div>
   <div>

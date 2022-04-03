@@ -1,33 +1,41 @@
 <template>
   <form @submit.prevent="register">
-    <p>
-      <label for="firstName">First name: </label>
-      <input id="firstName" v-model="firstName" type="text">
-    </p>
-    <p>
-      <label for="lastName">Last name: </label>
-      <input id="lastName" v-model="lastName" type="text">
-    </p>
-    <p>
-      <label for="homePhoneNumber">homePhoneNumber: </label>
-      <input id="homePhoneNumber" v-model="homePhoneNumber" type="text">
-    </p>
-    <p>
-      <label for="workPhoneNumber">workPhoneNumber: </label>
-      <input id="workPhoneNumber" v-model="workPhoneNumber" type="text">
-    </p>
-    <p>
-      <label for="email">Email: </label>
-      <input id="email" v-model="email" type="email">
-    </p>
-    <p>
-      <label for="password">Password: </label>
-      <input id="password" v-model="password" type="password">
-    </p>
-    <p class="message">
-      {{ message }}
-    </p>
-    <button type="submit">Accept</button>
+    <div class="row justify-content-center">
+      <div class="col-sm-6">
+        <div class="form-outline mb-4">
+          <label for="firstName" class="form-label">First name: </label>
+          <input id="firstName" class="form-control" v-model="firstName" type="text">
+        </div>
+        <div class="form-outline mb-4">
+          <label for="lastName" class="form-label">Last name: </label>
+          <input id="lastName" class="form-control" v-model="lastName" type="text">
+        </div>
+        <div class="form-outline mb-4">
+          <label for="homePhoneNumber" class="form-label">homePhoneNumber: </label>
+          <input id="homePhoneNumber" class="form-control" v-model="homePhoneNumber" type="text">
+        </div>
+        <div class="form-outline mb-4">
+          <label for="workPhoneNumber" class="form-label">workPhoneNumber: </label>
+          <input id="workPhoneNumber" class="form-control" v-model="workPhoneNumber" type="text">
+        </div>
+        <div class="form-outline mb-4">
+          <label for="email" class="form-label">Email: </label>
+          <input id="email" class="form-control" v-model="email" type="email">
+        </div>
+        <div class="form-outline mb-4">
+          <label for="password" class="form-label">Password: </label>
+          <input id="password" class="form-control" v-model="password" type="password">
+        </div>
+        <div class="message">
+          {{ message }}
+        </div>
+        <button type="submit">Accept</button>
+        <div class="message">
+          <a href="/login">Login</a>
+        </div>
+
+      </div>
+    </div>
   </form>
 
 </template>
@@ -76,19 +84,19 @@ export default {
 
     },
     goToList() {
-      this.$router.push({path: "/list"});
+      this.$router.push({path: "/"});
     },
     goToLogin() {
       this.$router.push({path: "/login"});
     }
   },
 
-    mounted() {
-      if (localStorage.token) {
-        this.goToList()
-      }
+  mounted() {
+    if (localStorage.token) {
+      this.goToList()
     }
   }
+}
 </script>
 
 <style scoped>
@@ -108,9 +116,11 @@ li {
 
 a {
   color: #42b983;
+  font-size: 22px;
 }
 
-p.message {
+.message {
   color: red;
+  font-size: 32px;
 }
 </style>

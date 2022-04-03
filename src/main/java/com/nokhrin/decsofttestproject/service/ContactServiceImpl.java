@@ -1,5 +1,7 @@
 package com.nokhrin.decsofttestproject.service;
 
+import com.nokhrin.decsofttestproject.exception.ContactNotFoundException;
+import com.nokhrin.decsofttestproject.exception.EmailAlreadyExistsException;
 import com.nokhrin.decsofttestproject.model.Contact;
 import com.nokhrin.decsofttestproject.model.ContactRole;
 import com.nokhrin.decsofttestproject.repository.ContactRepository;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -23,15 +26,23 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public void saveContact(Contact contact) {
-        contact.getContactRoles().add(contactRoleRepository.findByRole("ROLE_USER"));
-        contact.setPassword(hashPassword(contact.getPassword()));
-        contact.setEnabled(true);
-        contactRepository.save(contact);
+    @Transactional
+    public void saveContact(Contact contact) throws EmailAlreadyExistsException {
+        Contact dbContact = contactRepository.findByEmail(contact.getEmail());
+        if (dbContact == null) {
+
+            contact.getContactRoles().add(contactRoleRepository.findByRole("ROLE_USER"));
+            contact.setPassword(hashPassword(contact.getPassword()));
+            contact.setEnabled(true);
+            contactRepository.save(contact);
+        }else {
+            throw new EmailAlreadyExistsException("Email already exists");
+        }
     }
 
     @Override
-    public void editContact(Contact contact) {
+    @Transactional
+    public void editContact(Contact contact) throws ContactNotFoundException {
         Contact dbContact = contactRepository.findByEmail(contact.getEmail());
         if(dbContact!=null) {
             dbContact.setFirstName(contact.getFirstName());
@@ -39,14 +50,19 @@ public class ContactServiceImpl implements ContactService {
             dbContact.setWorkPhoneNumber(contact.getWorkPhoneNumber());
             dbContact.setHomePhoneNumber(contact.getHomePhoneNumber());
             contactRepository.save(dbContact);
+        }else {
+            throw new ContactNotFoundException("Contact not found");
         }
     }
 
     @Override
-    public void deleteContact(String email) {
+    @Transactional
+    public void deleteContact(String email){
         Contact contact = contactRepository.findByEmail(email);
         if(contact!=null) {
             contactRepository.delete(contact);
+        }else {
+            throw new ContactNotFoundException("Contact not found");
         }
     }
 
@@ -76,6 +92,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
+    @Transactional
     public void addRoleToContact(Long contactId, String role) {
         Contact contact = getContactById(contactId);
 

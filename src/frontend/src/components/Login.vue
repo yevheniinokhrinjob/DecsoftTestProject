@@ -1,14 +1,21 @@
 <template>
   <form @submit.prevent="loginAction">
-    <p>
-      <label for="username">Email: </label>
-      <input id="username" v-model="username" type="email"  >
-    </p>
-    <p>
-      <label for="password">Password: </label>
-      <input id="password" v-model="password" type="password" >
-    </p>
+    <div class="row justify-content-center">
+      <div class="col-sm-6">
+        <div class="form-outline mb-4">
+          <label for="email" class="form-label">Email: </label>
+          <input id="email" class="form-control" v-model="username" type="email">
+        </div>
+        <div class="form-outline mb-4">
+          <label for="password" class="form-label">Password: </label>
+          <input id="password" class="form-control" v-model="password" type="password">
+        </div>
     <button type="submit">Accept</button>
+        <div class="form-outline mb-4">
+      <a href="/register">Register</a>
+        </div>
+      </div>
+    </div>
   </form>
 
 </template>
@@ -44,7 +51,7 @@ export default {
 
     },
     goToList() {
-      this.$router.push({ path: "/list" });
+      this.$router.push({ path: "/" });
     },
   },
   mounted() {
@@ -70,5 +77,6 @@ li {
 }
 a {
   color: #42b983;
+  font-size: 22px;
 }
 </style>

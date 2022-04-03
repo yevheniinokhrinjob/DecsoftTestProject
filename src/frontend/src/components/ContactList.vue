@@ -3,20 +3,34 @@
     <div>
       <Navigation/>
     </div>
-      <div>
-        <input v-if="isNumber" v-model="searchData" placeholder="Search by number">
-        <input v-if="!isNumber" v-model="searchData" placeholder="Search by last Name">
-        <button @click="getContacts">Search</button>
-        <input type="checkbox" id="checkbox" v-model="isNumber">
-      </div>
-      <div>
-        <Contact
-            v-for="item of items"
-            v-bind:item="item"
-            :key="item.id"
-        />
+    <div class="row justify-content-center myclass" >
+      <div class="col-sm-6">
+        <div class="form-outline mb-4">
+          <div class="myclass">
+            <div class="row justify-content-md-center">
+              <div class="col col-lg-2">
+            <button @click="getContacts">Search</button>
+              </div>
 
+
+            <div class="col col-lg-2">
+          <input type="checkbox" class="big-checkbox" id="checkbox" v-model="isNumber">
+            </div>
+          </div>
+          </div>
+          <input v-if="isNumber" class="form-control" v-model="searchData" placeholder="Search by number">
+          <input v-if="!isNumber" class="form-control" v-model="searchData" placeholder="Search by last Name">
+
+        </div>
+        <div>
+          <Contact
+              v-for="item of items"
+              v-bind:item="item"
+              :key="item.id"
+          />
+        </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -42,9 +56,9 @@ export default {
   methods: {
     getContacts() {
       let vm = this;
-      if(!localStorage.token){
+      if (!localStorage.token) {
         this.goToLogin()
-      }else {
+      } else {
         const userToken = localStorage.token;
         const authString = "Bearer ".concat(userToken);
         let inputLine = "";
@@ -64,7 +78,7 @@ export default {
               vm.items = data
             })
       }
-    },  goToLogin() {
+    }, goToLogin() {
       this.$router.push({path: "/login"});
     }
 
@@ -74,4 +88,12 @@ export default {
 
 <style scoped>
 
+.myclass{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.big-checkbox {
+  width: 30px;
+  height: 30px;
+}
 </style>

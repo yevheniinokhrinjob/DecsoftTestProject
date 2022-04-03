@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface ContactService {
 
-    void saveContact(Contact contact);
-    void editContact(Contact contact);
-    void deleteContact(String email);
+    void saveContact(Contact contact) throws Exception;
+    void editContact(Contact contact) throws Exception;
+    void deleteContact(String email) throws Exception;
     List<Contact> listContacts();
     Contact getContactById(long id);
     Contact getContactByEmail(String email);

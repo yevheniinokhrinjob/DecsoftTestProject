@@ -7,7 +7,7 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="nav-padding">
-        <b-nav-item to="/list">List</b-nav-item>
+        <b-nav-item to="/">List</b-nav-item>
         <b-nav-item to="/edit">Edit</b-nav-item>
         <b-nav-item v-on:click="logout">Logout</b-nav-item>
       </b-navbar-nav>
