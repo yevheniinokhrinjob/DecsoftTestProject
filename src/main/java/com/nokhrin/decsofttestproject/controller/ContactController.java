@@ -4,6 +4,7 @@ package com.nokhrin.decsofttestproject.controller;
 import com.nokhrin.decsofttestproject.model.Contact;
 import com.nokhrin.decsofttestproject.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contact")
+@CrossOrigin
 public class ContactController {
 
     @Autowired
@@ -33,18 +35,10 @@ public class ContactController {
         return contactService.getContactByFirstNameAndLastName(firstName,lastName);
     }
 
-    @PostMapping("/register")
+    @PostMapping(value = "/register",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public String saveContact(@Valid @RequestBody Contact contact){
-    /*public String saveContact(){
-       Contact contact = new Contact();
-        contact.setEmail("sdas@e.com");
-        contact.setFirstName("A");
-        contact.setLastName("B");
-        contact.setHomePhoneNumber("123121");
-        contact.setWorkPhoneNumber("444");
-        contact.setPassword("password");*/
-     //   System.out.println(result.getErrorCount());
-        contactService.saveContact(contact);
+        System.out.println(contact.getFirstName());
+        //   contactService.saveContact(contact);
         return "Contact saved";
     }
     @PatchMapping
