@@ -36,7 +36,6 @@ public class JwtUserDetailsService implements UserDetailsService {
     private List<GrantedAuthority> buildUserAuthority(Set<ContactRole> contactRoles) {
 
         Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
-        // Build user's authorities
         for (ContactRole contactRole : contactRoles) {
             setAuths.add(new SimpleGrantedAuthority(contactRole.getRole()));
         }

@@ -35,7 +35,7 @@ public class ContactRoleController {
     public String addRole(@PathVariable String role, @PathVariable Long contactId) {
         try {
             contactService.addRoleToContact(contactId, role);
-            return "Role " + role + " assigned to appuser " + contactId;
+            return "Role " + role + " assigned to contact " + contactId;
         } catch (Exception e){
             return e.getMessage();
         }

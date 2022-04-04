@@ -38,7 +38,6 @@ export default {
         password: this.password,
 
       };
-      console.log(postData)
       localStorage.username=this.username
       fetch("/authenticate", {
         method: "POST",
