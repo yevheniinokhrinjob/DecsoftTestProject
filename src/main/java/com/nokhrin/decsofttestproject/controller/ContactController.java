@@ -60,7 +60,7 @@ public class ContactController {
     }
 
     @PatchMapping
-    public ResponseEntity editContact(@RequestBody Contact contact, HttpServletRequest request) {
+    public ResponseEntity editContact(@Valid @RequestBody Contact contact, HttpServletRequest request) {
 
         contact.setEmail(request.getUserPrincipal().getName());
         try {
